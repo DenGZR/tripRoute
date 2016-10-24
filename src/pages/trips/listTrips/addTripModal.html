@@ -1,0 +1,30 @@
+<ion-modal-view xmlns="http://www.w3.org/1999/html">
+	<ion-header-bar class="bar-calm">
+
+		<h1 class="title">New Trip</h1>
+		<div class="button button-clear" ng-click="listTripsCtrl.hideAddTripModal()">
+			<span class="icon ion-close"></span></div>
+	</ion-header-bar>
+
+	<ion-content class="padding">
+		<form name="newTripForm" ng-submit="listTripsCtrl.addTrip()">
+			<ion-list>
+				<label class="item item-input item-stacked-label">
+					<span class="input-label">Name</span>
+					<input type="text" ng-model="listTripsCtrl.newTrip.name" ng-minlength="3" ng-maxlength="30" required>
+				</label>
+				<label class="item item-input item-stacked-label">
+					<span class="input-label">Description</span>
+					<input type="text" ng-model="listTripsCtrl.newTrip.description" ng-maxlength="100">
+				</label>
+			</ion-list>
+			<div class="padding">
+
+				<button class="button button-block button-balanced" ng-disabled="newTripForm.$invalid">Add Trip</button>
+
+			</div>
+		</form>
+
+	</ion-content>
+
+</ion-modal-view>

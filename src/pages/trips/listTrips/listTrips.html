@@ -1,0 +1,19 @@
+<ion-view>
+	<ion-nav-title>List Trips</ion-nav-title>
+	<ion-content class="has-header has-footer padding">
+		<ion-list class="list" show-delete="listTripsCtrl.uiStateData.showDelete">
+			<ion-item class="item" ng-repeat="(idTrip, dataTrip) in listTripsCtrl.listTrips track by idTrip"
+			          href="#/trip/{{idTrip}}/map" >
+				{{dataTrip.name}}
+				<ion-delete-button class="ion-minus-circled" ng-click="listTripsCtrl.showConfirmRemoveTrip(idTrip, dataTrip)">
+				</ion-delete-button>
+			</ion-item>
+		</ion-list>
+	</ion-content>
+	<ion-footer-bar>
+		<button class="button button-assertive icon ion-ios-trash-outline" ng-click="listTripsCtrl.uiStateData.showDelete = !listTripsCtrl.uiStateData.showDelete"></button>
+		<button class="button button-balanced icon button-show-add-trip-modal" ng-click="listTripsCtrl.showAddTripModal()">
+			Add Trip
+		</button>
+	</ion-footer-bar>
+</ion-view>

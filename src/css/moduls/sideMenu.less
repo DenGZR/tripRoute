@@ -1,0 +1,48 @@
+.side-menu{
+	.header-side-menu{
+		padding: 15px;
+		position: relative;
+		::after{
+			content: "";
+			background: url('/img/avatar-background.jpg') no-repeat;
+			background-size: cover;
+			opacity: 0.25;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			right: 0;
+			position: absolute;
+			z-index: -1;
+		}
+		.avatar{
+			img{
+				border-radius: 50%;
+				width: 50%;
+				box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.75);
+			}
+		}
+	}
+}
+
+.icon{
+	&.ion-tickets{
+		&::before{
+			content: "";
+			display: block;
+			width: 1em;
+			height: 1em;
+			background: url("/img/ticket-icon.png") no-repeat;
+			background-size: contain;
+		}
+	}
+	&.ion-hotel{
+		&::before{
+			content: "";
+			display: block;
+			width: 1em;
+			height: 1em;
+			background: url("/img/hotel-icon.png") no-repeat;
+			background-size: contain;
+		}
+	}
+}

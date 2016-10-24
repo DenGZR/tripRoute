@@ -1,0 +1,34 @@
+<ion-view view-title="Points" class="list-trip-points" >
+	<div class="bar bar-subheader" ng-hide="tripCtrl.currentTrip.tripPoints.length < 1">
+		<div class="buttons">
+			<button class="button button-icon icon ion-ios-minus-outline"
+			        ng-click="tripCtrl.uiStateData.showDelete = !tripCtrl.uiStateData.showDelete; tripCtrl.uiStateData.showReorder = false"></button>
+		</div>
+		<h1 class="title"></h1>
+		<div class="buttons">
+			<button class="button" ng-click="tripCtrl.uiStateData.showDelete = false; tripCtrl.uiStateData.showReorder = !tripCtrl.uiStateData.showReorder" ng-hide="tripCtrl.currentTrip.tripPoints.length < 2">
+				Reorder
+			</button>
+		</div>
+	</div>
+	<ion-content class="has-subheader">
+		<ion-list class="trip-points-list" show-delete="tripCtrl.uiStateData.showDelete" show-reorder="tripCtrl.uiStateData.showReorder">
+			<ion-item class="item item-icon-left item-icon-right" ng-repeat="point in tripCtrl.currentTrip.tripPoints track by $index" href="">
+				<i class="icon">{{$index+1}}</i><span class="item-list-points-name">{{point.name}}.</span> <span>{{point.descriptions}}</span><span class="item-list-points-lat-lng">({{point.lat}}, {{point.lng}})</span><i class="icon ion-ios-location-outline"></i>
+				<ion-delete-button class="ion-minus-circled"
+				                   ng-click="tripCtrl.deletePointFromList($index)">
+				</ion-delete-button>
+				<ion-option-button class="button-assertive"
+				                   ng-click="edit(item)">
+					Edit
+				</ion-option-button>
+				<ion-option-button class="button-calm"
+				                   ng-click="share(item)">
+					Share
+				</ion-option-button>
+				<ion-reorder-button class="ion-navicon" on-reorder="tripCtrl.movePointFromList(point, $fromIndex, $toIndex)"></ion-reorder-button>
+			</ion-item>
+
+		</ion-list>
+	</ion-content>
+</ion-view>

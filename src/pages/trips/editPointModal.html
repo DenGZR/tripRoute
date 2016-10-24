@@ -1,0 +1,60 @@
+<ion-modal-view xmlns="http://www.w3.org/1999/html">
+	<ion-header-bar class="bar-calm">
+
+		<h1 class="title">New Point</h1>
+		<div class="button button-clear" ng-click="editPointModal.hide()"><span class="icon ion-close"></span></div>
+	</ion-header-bar>
+
+	<ion-content class="padding">
+
+		<form name="locationForm" ng-submit="addPointTrip()">
+			<ion-list>
+				<label class="item item-input item-stacked-label">
+					<span class="input-label">Name</span>
+					<input type="text" ng-model="newPoint.name" placeholder="What's Here?" ng-minlength="1" ng-maxlength="100" required>
+				</label>
+				<label class="item item-input item-stacked-label">
+					<span class="input-label">Descriptions</span>
+					<textarea ng-model="newPoint.descriptions" placeholder="Describe the details of the road point..." rows="4"></textarea>
+				</label>
+
+				<div class="item item-divider">Position of the point in the list</div>
+				<ion-radio class="item" ng-model="positionNewPointOnList" ng-value="'start'">Start</ion-radio>
+				<ion-radio class="item" ng-model="positionNewPointOnList" ng-value="'waypoint'">Waypoint</ion-radio>
+				<ion-radio class="item" ng-model="positionNewPointOnList" ng-value="'finish'">Finish</ion-radio>
+
+				<div class="item item-select" ng-hide="positionNewPointOnList!='waypoint'">
+					<div class="input-label">
+						Add to the list after
+					</div>
+					<select>
+						<option>Blue</option>
+						<option selected>Green</option>
+						<option>Red</option>
+					</select>
+				</div>
+
+
+			</ion-list>
+
+			<div class="row">
+						<span class="col">
+						LAT : {{newPoint.lat}}
+					</span>
+					<span class="col">
+						LNG : {{newPoint.lng}}
+					</span>
+			</div>
+
+
+			<div class="padding">
+
+				<button class="button button-block button-balanced" ng-disabled="locationForm.$invalid">Save Location</button>
+
+			</div>
+
+		</form>
+
+	</ion-content>
+
+</ion-modal-view>
