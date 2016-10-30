@@ -34,15 +34,11 @@ export default function mapFactory ($http, $q, leafletData, $ionicLoading) {
 				return $http.get(urlNominatimReverse, config);
 			}
 		},
-		mapQuest:{
+		mapQuest: {
 			routing: function (tripPoints) {
 				var that = this;
 
 				var locations = [];
-
-				tripPoints.forEach(function (point) {
-					locations.push({latLng: {lat: point.lat, lng: point.lng}});
-				});
 
 				resultRouting = $q.defer();
 
@@ -53,12 +49,18 @@ export default function mapFactory ($http, $q, leafletData, $ionicLoading) {
 				$ionicLoading.show({
 					template: '<ion-spinner icon="lines"></ion-spinner>'
 				});
-				
-				if (locations.length > 1) {
+
+				if (Array.isArray(tripPoints) && tripPoints.length > 1) {
+
+					tripPoints.forEach(function (point) {
+						locations.push({latLng: {lat: point.lat, lng: point.lng}});
+					});
+
 					if (!this.dir) {
 						this.dir = MQ.routing.directions()
 							.on('error', function (info) {
 								$ionicLoading.hide();
+								that._removeRoutingLayer();
 								if (info.type === 'error') {
 									resultRouting.resolve({
 										error: true,
@@ -103,7 +105,6 @@ export default function mapFactory ($http, $q, leafletData, $ionicLoading) {
 								fitBounds: true,
 								draggable: false
 							});
-							// console.log(that.tripRouting);
 							map.addLayer(that.tripRouting);
 
 						});
@@ -125,7 +126,7 @@ export default function mapFactory ($http, $q, leafletData, $ionicLoading) {
 				});
 			}
 		},
-		centerPoints:{}
-		
+		centerPoints: {}
+
 	}
 }

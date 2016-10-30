@@ -2,16 +2,17 @@
  * Created by Artur on 16.09.16.
  */
 import loginTmpl from './pages/login/login.html';
-import loginCtrl from './pages/login/loginCtrl'
+import loginCtrl from './pages/login/loginCtrl';
+
+import registrationTmpl from './pages/registration/registration.html';
+import registrationCtrl from './pages/registration/registrationCtrl';
+
 
 import sideMenuTmpl from './pages/menu/sideMenu.html';
 import sideMenuCtrl from './pages/menu/sideMenuCtrl.js';
 
 import listTrips from './pages/trips/listTrips/listTrips.html';
 import listTripsCtrl from './pages/trips/listTrips/listTripsCtrl.js';
-
-
-
 
 import tabTripTmpl from './pages/trips/tabTrip.html';
 import tripCtrl from './pages/trips/tripCtrl';
@@ -40,8 +41,14 @@ export default function routing ($stateProvider, $urlRouterProvider) {
 			controller: loginCtrl,
 			controllerAs: 'loginCtrl'
 		})
+		.state('registration', {
+			url: '/registration',
+			template: registrationTmpl,
+			controller: registrationCtrl,
+			controllerAs: 'registrationCtrl'
+		})
 		.state('app.addTrip', {
-			url: '/add-trip',
+			url: '/add-trip'
 			//template: tmplHome
 		})
 		.state('app.listTrips', {

@@ -74,7 +74,7 @@ export default function tripCtrl ($scope, $stateParams, $timeout, $ionicModal, $
 	$scope.$on('leafletDirectiveMarker.tripMap.dragend', function (event, args) {
 		vm.currentTrip.tripPoints[args.modelName].lat = args.model.lat;
 		vm.currentTrip.tripPoints[args.modelName].lng = args.model.lng;
-		mapFactory.reRouting(vm.currentTrip.tripPoints);
+		mapFactory.mapQuest.routing(vm.currentTrip.tripPoints);
 	});
 
 	$scope.$on('leafletDirectiveMarker.tripMap.contextmenu', function (event, args) {
@@ -91,27 +91,29 @@ export default function tripCtrl ($scope, $stateParams, $timeout, $ionicModal, $
 			},
 			destructiveButtonClicked: function () {
 				vm.currentTrip.tripPoints.splice(args.modelName, 1);
-				mapFactory.reRouting(vm.currentTrip.tripPoints);
+				mapFactory.mapQuest.routing(vm.currentTrip.tripPoints);
 				return true;
 			}
 		});
 	});
 
 	$scope.addPointTrip = function () {
-		$scope.editPointModal.hide();
 
 		var length = toolsService.lengthObject(vm.currentTrip.tripPoints);
-		console.log(length);
 
 		var data = {};
 
 		if (!vm.currentTrip.tripPoints) {
-			vm.currentTrip.tripPoints = {};
+			vm.currentTrip.tripPoints = [];
 		}
+
+		console.log(length);
 
 		vm.currentTrip.tripPoints[length] = $scope.newPoint;
 
 		vm.currentTrip.$save();
+
+		$scope.editPointModal.hide();
 
 		mapFactory.mapQuest.routing(vm.currentTrip.tripPoints);
 	}

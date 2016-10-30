@@ -35,6 +35,10 @@ export default function AuthService ($firebaseAuth, $localStorage, $q) {
 			auth.$signOut();
 		},
 
+		createUserWithEmailAndPassword: function (email, password) {
+			return auth.$createUserWithEmailAndPassword(email, password);
+		},
+
 		getDataUser: function () {
 			return auth.$getAuth();
 		}

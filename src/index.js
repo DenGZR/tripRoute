@@ -28,9 +28,10 @@ import listTripsService from './pages/trips/listTrips/listTripsService';
 //modules
 import Auth from './modules/Auth';
 import firebaseData from './modules/firebaseData';
+import validation from './modules/validation';
 
 
-angular.module('routeTrip', ['ionic', 'firebase', 'leaflet-directive', 'Auth', 'firebaseData', 'ngStorage'])
+angular.module('routeTrip', ['ionic', 'firebase', 'leaflet-directive', 'ngStorage', 'Auth', 'firebaseData', 'validation'])
 	.run(function ($ionicPlatform, FirebaseDB) {
 		$ionicPlatform.ready(function () {
 			if (window.cordova && window.cordova.plugins.Keyboard) {
@@ -55,7 +56,7 @@ angular.module('routeTrip', ['ionic', 'firebase', 'leaflet-directive', 'Auth', '
 		$rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
 			console.log("stateChangeStart triggered");
 			if (!AuthService.isLoggedIn()) {
-				if (toState.name !== 'login') {
+				if (toState.name !== 'login' && toState.name !== 'registration') {
 					event.preventDefault();
 					$state.go('login');
 				}
